@@ -53,7 +53,7 @@ RUN cmake -G "'Visual Studio 16 2019'" -DOPENSSL_ROOT_DIR='C:\Program Files\Open
 
 # Set up config files and binaries in single /fluent-bit hierarchy for easy copy in later stage
 RUN New-Item -Path  /fluent-bit/etc/ -ItemType "directory"; `
-    Copy-Item -Path /src/conf/fluent-bit-win32.conf /fluent-bit/etc/fluent-bit.conf; `
+    Copy-Item -Path /src/conf/skywalker-win32.conf /fluent-bit/etc/fluent-bit.conf; `
     Copy-Item -Path /src/conf/parsers.conf /fluent-bit/etc/; `
     Copy-Item -Path /src/conf/parsers_ambassador.conf /fluent-bit/etc/; `
     Copy-Item -Path /src/conf/parsers_java.conf /fluent-bit/etc/; `

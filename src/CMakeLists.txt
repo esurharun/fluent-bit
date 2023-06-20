@@ -544,7 +544,7 @@ if(FLB_BINARY)
 
   if(FLB_SYSTEM_WINDOWS)
     install(FILES
-      "${PROJECT_SOURCE_DIR}/conf/fluent-bit-win32.conf"
+      "${PROJECT_SOURCE_DIR}/conf/skywalker-win32.conf"
       DESTINATION ${FLB_INSTALL_CONFDIR}
       COMPONENT binary
       RENAME "${FLB_OUT_NAME}.conf")

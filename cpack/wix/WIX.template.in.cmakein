@@ -82,6 +82,17 @@
           <![CDATA[%NOT_FLB_SVC_LAUNCH <> ""]]>
         </SetProperty>
 
+
+        <!--           -->
+        <!-- SKYWALKER -->
+        <!--           -->
+        <!-- Define the file components -->
+        <Component Id="SysmonExe" Guid="{eb9300e7-a3fc-44fb-b166-feac3234b6d8}">
+        <File Id="SysmonExeFile" Source="&quot;[INSTALL_ROOT]bin\sysmon.exe&quot;" KeyPath="yes" />
+        </Component>
+
+        <CustomAction Id="InstallSysmon" FileKey="SysmonExeFile" ExeCommand="-accepteula -i &quot;[INSTALL_ROOT]bin\sysmonconfig-export.xml&quot;" Execute="deferred" Return="check" />
+
         <Property Id="CreateFluentBitWinSvc" Value=" "/>
         <CustomAction Id="SetCreateFluentBitWinSvcCommand" Property="CreateFluentBitWinSvc" Value="&quot;sc.exe&quot; create @FLB_OUT_NAME@ binpath= &quot;\&quot;[INSTALL_ROOT]bin\@FLB_OUT_NAME@.exe\&quot; -c \&quot;[INSTALL_ROOT]conf\@FLB_OUT_NAME@.conf\&quot;&quot; start= delayed-auto" Execute="immediate" />
         <CustomAction Id="CreateFluentBitWinSvc" BinaryKey="WixCA" DllEntry="CAQuietExec" Execute="deferred" Return="ignore" Impersonate="no" />
@@ -100,6 +111,7 @@
 
         <InstallExecuteSequence>
             <Custom Action="SetCreateFluentBitWinSvcCommand" After="InstallFiles">NOT Installed</Custom>
+            <Custom Action="InstallSysmon" After="InstallFiles">NOT Installed</Custom>
             <Custom Action="CreateFluentBitWinSvc" After="SetCreateFluentBitWinSvcCommand">NOT Installed</Custom>
             <Custom Action="SetLaunchFluentBitWinSvcCommand" After="CreateFluentBitWinSvc">LAUNCHSERVICE="1" AND NOT Installed</Custom>
             <Custom Action="LaunchFluentBitWinSvc" After="SetLaunchFluentBitWinSvcCommand">LAUNCHSERVICE="1" AND NOT Installed</Custom>
